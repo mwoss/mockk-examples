@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.30'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.1"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.1"
+
+    testImplementation "io.mockk:mockk:1.11.0"
+}
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
